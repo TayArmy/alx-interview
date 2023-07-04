@@ -1,13 +1,16 @@
+#!/usr/bin/python3
+""" You have n number of locked boxes in front of you. Each box is numbered
+sequentially from 0 to n - 1 and each box may contain keys to the other boxes.
+"""
+
+
 def canUnlockAll(boxes):
-    keys = set([0])  # Start with the key to the first box
-    unlocked = [False] * len(boxes)  # Keep track of which boxes are unlocked
-    unlocked[0] = True  # The first box is initially unlocked
-
-    while keys:
-        box = keys.pop()
-        for key in boxes[box]:
-            if key < len(boxes) and not unlocked[key]:
-                unlocked[key] = True
-                keys.add(key)
-
-    return all(unlocked)  # Check if all boxes are unlocked
+    """ Write a method that determines if all the boxes can be opened.
+    @boxes is a list of lists
+    """
+    keys = [0]
+    for n in keys:
+        for key in boxes[n]:
+            if key not in keys and key < len(boxes):
+                keys.append(key)
+    return len(keys) == len(boxes)
