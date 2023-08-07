@@ -15,7 +15,6 @@ def is_safe(board, row, col):
 
     return True
 
-
 def solve_nqueens(N):
     def backtrack(row):
         if row == N:
@@ -31,7 +30,6 @@ def solve_nqueens(N):
     solutions = []
     backtrack(0)
     return solutions
-
 
 if __name__ == "__main__":
     if len(sys.argv) != 2:
