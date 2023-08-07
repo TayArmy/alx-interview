@@ -1,49 +1,52 @@
 #!/usr/bin/python3
-""" Solving the nqueens problem where n queens are placed in such
-    a way that one queen cannot attack the other...
-"""
+"""Solves the N queen problem"""
 import sys
 
 
-def isValid(cBoard, row, col):
-    """ checks if a possible solution is valid, returning
-        true or false
-    """
+def is_safe(board, row, col):
+    # Check if there is a queen in the same column
     for i in range(row):
-        if cBoard[i] == col or \
-           cBoard[i] - i == col - row or \
-           cBoard[i] + i == col + row:
+        if board[i] == col:
             return False
+
+        # Check diagonals
+        if abs(board[i] - col) == abs(i - row):
+            return False
+
     return True
 
+def solve_nqueens(N):
+    def backtrack(row):
+        if row == N:
+            solutions.append([[i, board[i]] for i in range(N)])
+            return
 
-def backTrack(cBoard, row):
-    """ backtrack to find valid solutions from the board set """
-    # set base case
-    if row == len(cBoard):
-        print('[', end='')
-        for i in range(len(cBoard)):
-            print([i, cBoard[i]], end=', ')
-        print(']')
-        return
-    for col in range(len(cBoard)):
-        if isValid(cBoard, row, col):
-            cBoard[row] = col
-            backTrack(cBoard, row + 1)
+        for col in range(N):
+            if is_safe(board, row, col):
+                board[row] = col
+                backtrack(row + 1)
 
+    board = [-1] * N
+    solutions = []
+    backtrack(0)
+    return solutions
 
-if __name__ == '__main__':
+if __name__ == "__main__":
+    if len(sys.argv) != 2:
+        print("Usage: nqueens N")
+        sys.exit(1)
+
     try:
-        if len(sys.argv) < 2:
-            print('Usage: nqueens N')
-            sys.exit(1)
-        n = int(sys.argv[1])
+        N = int(sys.argv[1])
     except ValueError:
         print("N must be a number")
         sys.exit(1)
-    if n < 4:
+
+    if N < 4:
         print("N must be at least 4")
         sys.exit(1)
-    # initialize a square chess board row (solution set)
-    cBoard = [-1] * n
-    backTrack(cBoard, 0)
+
+    solutions = solve_nqueens(N)
+
+    for solution in solutions:
+        print(solution)
