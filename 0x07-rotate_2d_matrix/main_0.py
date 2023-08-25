@@ -10,7 +10,6 @@ if __name__ == "__main__":
               [7, 8, 9]]
 
     rotate_2d_matrix(matrix)
-<<<<<<< HEAD
     print(matrix)
 
     matrix = [[1, 2],
@@ -25,6 +24,4 @@ if __name__ == "__main__":
               [13, 14, 15, 16]]
 
     rotate_2d_matrix(matrix)
-=======
->>>>>>> ddb1ab1f5c8fd9990d1cf54db1b1e3baac1ea2b5
     print(matrix)
